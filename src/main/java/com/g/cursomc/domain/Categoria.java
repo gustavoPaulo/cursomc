@@ -2,16 +2,18 @@ package com.g.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Categoria implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codigo;
     private String nome;
-
-    public Categoria(Integer codigo, String nome) {
-        this.codigo = codigo;
-        this.nome = nome;
-    }
 
     public Integer getCodigo() {
         return codigo;

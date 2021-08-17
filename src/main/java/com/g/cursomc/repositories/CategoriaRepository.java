@@ -1,4 +1,4 @@
-package com.g.cursomc.repositoryes;
+package com.g.cursomc.repositories;
 
 import com.g.cursomc.domain.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;

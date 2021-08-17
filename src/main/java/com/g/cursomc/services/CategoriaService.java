@@ -2,7 +2,7 @@ package com.g.cursomc.services;
 
 import com.g.cursomc.domain.Categoria;
 import com.g.cursomc.exceptionhandler.ObjectNotFoundExcepton;
-import com.g.cursomc.repositoryes.CategoriaRepository;
+import com.g.cursomc.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

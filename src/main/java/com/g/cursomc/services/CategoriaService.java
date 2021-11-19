@@ -18,4 +18,8 @@ public class CategoriaService {
         Optional<Categoria> categoria = categoriaRepository.findById(id);
         return categoria.orElseThrow(() -> new ObjectNotFoundExcepton(Categoria.class.getSimpleName(), id));
     }
+
+    public Categoria inserir(Categoria categoria) {
+        return categoriaRepository.save(categoria);
+    }
 }

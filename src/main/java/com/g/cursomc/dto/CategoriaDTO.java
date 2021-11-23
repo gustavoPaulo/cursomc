@@ -1,7 +1,6 @@
 package com.g.cursomc.dto;
 
 import com.g.cursomc.domain.Categoria;
-
 import java.io.Serializable;
 
 public class CategoriaDTO implements Serializable {

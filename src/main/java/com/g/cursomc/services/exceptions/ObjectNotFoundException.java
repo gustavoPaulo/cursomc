@@ -1,8 +1,8 @@
-package com.g.cursomc.exceptionhandler;
+package com.g.cursomc.services.exceptions;
 
-public class ObjectNotFoundExcepton extends RuntimeException {
+public class ObjectNotFoundException extends RuntimeException {
 
-    public ObjectNotFoundExcepton(String objeto, Integer id) {
+    public ObjectNotFoundException(String objeto, Integer id) {
         super(objetoNaoEncontrado(objeto, id));
     }
 

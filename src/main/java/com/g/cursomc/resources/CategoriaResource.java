@@ -18,17 +18,30 @@ public class CategoriaResource {
     private CategoriaService categoriaService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> buscarPorId(@PathVariable Integer id) {
-        Categoria categoria = categoriaService.buscarPorId(id);
+    public ResponseEntity<Categoria> find(@PathVariable Integer id) {
+        Categoria categoria = categoriaService.find(id);
         return ResponseEntity.ok().body(categoria);
     }
 
     @PostMapping
-    public ResponseEntity<Void> inserir(@RequestBody Categoria categoria) {
-        categoria = categoriaService.inserir(categoria);
+    public ResponseEntity<Void> insert(@RequestBody Categoria categoria) {
+        categoria = categoriaService.insert(categoria);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(categoria.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@RequestBody Categoria categoria, @PathVariable Integer id) {
+        categoria.setId(id);
+        categoria = categoriaService.update(categoria);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        categoriaService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

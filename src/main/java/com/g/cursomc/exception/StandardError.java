@@ -1,4 +1,4 @@
-package com.g.cursomc.exceptionhandler;
+package com.g.cursomc.exception;
 
 import java.io.Serializable;
 

@@ -1,7 +1,7 @@
 package com.g.cursomc.services;
 
 import com.g.cursomc.domain.Pedido;
-import com.g.cursomc.exceptionhandler.ObjectNotFoundExcepton;
+import com.g.cursomc.services.exceptions.ObjectNotFoundException;
 import com.g.cursomc.repositories.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,8 @@ public class PedidoService {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    public Pedido buscarPorId(Integer id) {
+    public Pedido find(Integer id) {
         Optional<Pedido> pedido = pedidoRepository.findById(id);
-        return pedido.orElseThrow(() -> new ObjectNotFoundExcepton(Pedido.class.getSimpleName(), id));
+        return pedido.orElseThrow(() -> new ObjectNotFoundException(Pedido.class.getSimpleName(), id));
     }
 }

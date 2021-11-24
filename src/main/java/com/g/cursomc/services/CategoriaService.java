@@ -53,8 +53,7 @@ public class CategoriaService {
     }
 
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String direction, String orderBy) {
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return categoriaRepository.findAll(pageRequest);
+        return categoriaRepository.findAll(PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy));
     }
 
     public Categoria fromDTO(CategoriaDTO categoriaDto) {

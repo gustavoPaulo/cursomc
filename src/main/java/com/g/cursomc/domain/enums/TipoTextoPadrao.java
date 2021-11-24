@@ -4,6 +4,7 @@ public enum TipoTextoPadrao {
 
     ERRO_VALIDACAO("Erro de validação."),
     ERRO_DATA_INTEGRITY_CATEGORIA("Não é possível excluir uma categoria que possui produtos vinculados."),
+    ERRO_DATA_INTEGRITY_CLIENTE("Não é possível excluir um cliente que possui pedidos vinculados."),
 
     PADRAO_DATA_HORA("dd/MM/yyyy HH:mm:ss");
 

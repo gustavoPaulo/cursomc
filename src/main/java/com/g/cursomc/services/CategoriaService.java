@@ -1,6 +1,7 @@
 package com.g.cursomc.services;
 
 import com.g.cursomc.domain.Categoria;
+import com.g.cursomc.domain.enums.TipoTextoPadrao;
 import com.g.cursomc.dto.CategoriaDTO;
 import com.g.cursomc.services.exceptions.DataIntegrityException;
 import com.g.cursomc.services.exceptions.ObjectNotFoundException;
@@ -23,7 +24,8 @@ public class CategoriaService {
 
     public Categoria find(Integer id) {
         Optional<Categoria> categoria = categoriaRepository.findById(id);
-        return categoria.orElseThrow(() -> new ObjectNotFoundException(Categoria.class.getSimpleName(), id));
+        return categoria.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto " + Categoria.class.getSimpleName() + " com o ID " + id + ", não encontrado!"));
     }
 
     public Categoria insert(Categoria categoria) {
@@ -42,7 +44,7 @@ public class CategoriaService {
             categoriaRepository.deleteById(id);
 
         } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos vinculados.");
+            throw new DataIntegrityException(TipoTextoPadrao.ERRO_DATA_INTEGRITY_CATEGORIA.getDescricao());
         }
     }
 

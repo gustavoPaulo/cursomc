@@ -1,6 +1,7 @@
 package com.g.cursomc.services;
 
 import com.g.cursomc.domain.Categoria;
+import com.g.cursomc.domain.Cliente;
 import com.g.cursomc.domain.enums.TipoTextoPadrao;
 import com.g.cursomc.dto.CategoriaDTO;
 import com.g.cursomc.services.exceptions.DataIntegrityException;
@@ -33,8 +34,7 @@ public class CategoriaService {
     }
 
     public Categoria update(Categoria categoria) {
-        find(categoria.getId());
-        return categoriaRepository.save(categoria);
+        return categoriaRepository.save(updateData(find(categoria.getId()), categoria));
     }
 
     public void delete(Integer id) {
@@ -58,5 +58,10 @@ public class CategoriaService {
 
     public Categoria fromDTO(CategoriaDTO categoriaDto) {
         return new Categoria(categoriaDto.getId(), categoriaDto.getNome());
+    }
+
+    private Categoria updateData(Categoria newCategoria, Categoria categoria) {
+        newCategoria.setNome(categoria.getNome());
+        return newCategoria;
     }
 }

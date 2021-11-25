@@ -6,6 +6,8 @@ public enum TipoTextoPadrao {
     ERRO_DATA_INTEGRITY_CATEGORIA("Não é possível excluir uma categoria que possui produtos vinculados."),
     ERRO_DATA_INTEGRITY_CLIENTE("Não é possível excluir um cliente que possui pedidos vinculados."),
 
+    CPF_INVALIDO("CPF inválido."),
+    CNPJ_INVALIDO("CNPJ inválido."),
     PADRAO_DATA_HORA("dd/MM/yyyy HH:mm:ss");
 
     private String descricao;

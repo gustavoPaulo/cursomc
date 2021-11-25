@@ -8,6 +8,7 @@ public enum TipoTextoPadrao {
 
     CPF_INVALIDO("CPF inválido."),
     CNPJ_INVALIDO("CNPJ inválido."),
+    EMAIL_JA_EXISTENTE("E-mail já atribuído a outro cliente."),
     PADRAO_DATA_HORA("dd/MM/yyyy HH:mm:ss");
 
     private String descricao;

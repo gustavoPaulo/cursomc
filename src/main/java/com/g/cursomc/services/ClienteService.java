@@ -3,7 +3,6 @@ package com.g.cursomc.services;
 import com.g.cursomc.domain.Cidade;
 import com.g.cursomc.domain.Cliente;
 import com.g.cursomc.domain.Endereco;
-import com.g.cursomc.domain.Estado;
 import com.g.cursomc.domain.enums.TipoCliente;
 import com.g.cursomc.domain.enums.TipoTextoPadrao;
 import com.g.cursomc.dto.ClienteDTO;

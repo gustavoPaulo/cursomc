@@ -3,6 +3,7 @@ package com.g.cursomc.services;
 import com.g.cursomc.domain.ItemPedido;
 import com.g.cursomc.domain.PagamentoComBoleto;
 import com.g.cursomc.domain.Pedido;
+import com.g.cursomc.domain.Produto;
 import com.g.cursomc.domain.enums.EstadoPagamento;
 import com.g.cursomc.repositories.ItemPedidoRepository;
 import com.g.cursomc.repositories.PagamentoRepository;
@@ -33,6 +34,12 @@ public class PedidoService {
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
 
+    @Autowired
+    private ClienteService clienteService;
+
+    @Autowired
+    private ProdutoService produtoService;
+
     public Pedido find(Integer id) {
         Optional<Pedido> pedido = pedidoRepository.findById(id);
         return pedido.orElseThrow(() -> new ObjectNotFoundException(
@@ -42,6 +49,7 @@ public class PedidoService {
     public Pedido insert(Pedido pedido) {
         pedido.setId(null);
         pedido.setInstante(new Date());
+        pedido.setCliente(clienteService.find(pedido.getCliente().getId()));
         pedido.getPagamento().setEstado(EstadoPagamento.PENDENTE);
         pedido.getPagamento().setPedido(pedido);
 
@@ -55,11 +63,15 @@ public class PedidoService {
 
         for (ItemPedido item : pedido.getItens()) {
             item.setDesconto(0.0);
-            item.setPreco(produtoRepository.findById(item.getProduto().getId()).get().getPreco());
+            item.setProduto(produtoService.find(item.getProduto().getId()));
+            item.setPreco(item.getProduto().getPreco());
             item.setPedido(pedido);
         }
 
         itemPedidoRepository.saveAll(pedido.getItens());
+
+        System.out.printf(pedido.toString());
+
         return pedido;
     }
 }

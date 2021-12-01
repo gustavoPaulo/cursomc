@@ -3,7 +3,6 @@ package com.g.cursomc.services;
 import com.g.cursomc.domain.ItemPedido;
 import com.g.cursomc.domain.PagamentoComBoleto;
 import com.g.cursomc.domain.Pedido;
-import com.g.cursomc.domain.Produto;
 import com.g.cursomc.domain.enums.EstadoPagamento;
 import com.g.cursomc.repositories.ItemPedidoRepository;
 import com.g.cursomc.repositories.PagamentoRepository;
@@ -40,6 +39,9 @@ public class PedidoService {
     @Autowired
     private ProdutoService produtoService;
 
+    @Autowired
+    private EmailService emailService;
+
     public Pedido find(Integer id) {
         Optional<Pedido> pedido = pedidoRepository.findById(id);
         return pedido.orElseThrow(() -> new ObjectNotFoundException(
@@ -70,7 +72,7 @@ public class PedidoService {
 
         itemPedidoRepository.saveAll(pedido.getItens());
 
-        System.out.printf(pedido.toString());
+        emailService.sendOrderConfirmationEmail(pedido);
 
         return pedido;
     }

@@ -1,11 +1,13 @@
 package com.g.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.g.cursomc.domain.enums.Perfil;
 import com.g.cursomc.domain.enums.TipoCliente;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class Cliente implements Serializable {
@@ -32,8 +34,12 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
-    public Cliente() {
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "PERFIS")
+    private Set<Integer> perfis = new HashSet<>();
 
+    public Cliente() {
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Cliente(Integer id, String nome, String email, String cpfCnpj, TipoCliente tipo, String senha) {
@@ -43,6 +49,7 @@ public class Cliente implements Serializable {
         this.cpfCnpj = cpfCnpj;
         this.tipo = (tipo == null) ? null : tipo.getCodigo();
         this.senha = senha;
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Integer getId() {
@@ -115,6 +122,14 @@ public class Cliente implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Set<Perfil> getPerfis() {
+        return perfis.stream().map(perfil -> Perfil.toEnum(perfil)).collect(Collectors.toSet());
+    }
+
+    public void addPerfil(Perfil perfil) {
+        perfis.add(perfil.getCodigo());
     }
 
     @Override
